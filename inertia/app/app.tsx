@@ -1,23 +1,28 @@
 /// <reference path="../../adonisrc.ts" />
 /// <reference path="../../config/inertia.ts" />
 
-import '../css/app.css';
-import { hydrateRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from '@adonisjs/inertia/helpers';
+import { createInertiaApp } from '@inertiajs/react';
+import { hydrateRoot } from 'react-dom/client';
+import BaseLayout from '~/layouts/_base_layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS';
+const appName = import.meta.env.VITE_APP_NAME || 'MY_CUSTOM_PROJET';
 
 createInertiaApp({
   progress: { color: '#5468FF' },
 
   title: (title) => `${title} - ${appName}`,
 
-  resolve: (name) => {
-    return resolvePageComponent(
+  resolve: async (name) => {
+    const currentPage: any = await resolvePageComponent(
       `../pages/${name}.tsx`,
       import.meta.glob('../pages/**/*.tsx')
     );
+
+    currentPage.default.layout =
+      currentPage.default.layout || ((p: any) => <BaseLayout children={p} />);
+
+    return currentPage;
   },
 
   setup({ el, App, props }) {
