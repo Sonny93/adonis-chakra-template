@@ -5,11 +5,27 @@ import {
 } from '@chakra-ui/react';
 import type { PropsWithChildren } from 'react';
 
-const { Button } = chakraTheme.components;
+const {
+  Button,
+  Input,
+  Checkbox,
+  Heading,
+  Container,
+  Form,
+  FormLabel,
+  FormError,
+} = chakraTheme.components;
 
 const theme = extendBaseTheme({
   components: {
     Button,
+    Input,
+    Checkbox,
+    Heading,
+    Container,
+    Form,
+    FormLabel,
+    FormError,
   },
 });
 

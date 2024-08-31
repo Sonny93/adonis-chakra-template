@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { hydrateRoot } from 'react-dom/client';
 import BaseLayout from '~/layouts/_base_layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'MY_CUSTOM_PROJET';
+const appName = import.meta.env.VITE_APP_NAME || 'my_custom_project';
 
 createInertiaApp({
   progress: { color: '#5468FF' },

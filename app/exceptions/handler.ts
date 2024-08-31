@@ -1,9 +1,11 @@
+import { errors as authErrors } from '@adonisjs/auth';
+import { ExceptionHandler, HttpContext } from '@adonisjs/core/http';
 import app from '@adonisjs/core/services/app';
-import { HttpContext, ExceptionHandler } from '@adonisjs/core/http';
 import type {
   StatusPageRange,
   StatusPageRenderer,
 } from '@adonisjs/core/types/http';
+import { errors } from '@adonisjs/lucid';
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -35,6 +37,16 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: unknown, ctx: HttpContext) {
+    if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
+      ctx.session.flash('errors', [error]);
+    }
+
+    if (error instanceof errors.E_ROW_NOT_FOUND) {
+      return ctx.response.redirect('/');
+    }
+
+    // TODO: handle duplicated entries for email
+
     return super.handle(error, ctx);
   }
 
