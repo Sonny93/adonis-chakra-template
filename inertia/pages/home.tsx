@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   createIcon,
+  Flex,
   Heading,
   Icon,
   Link,
@@ -16,7 +17,12 @@ import useAuth from '~/hooks/use_auth';
 export default function Home() {
   const { isAuthenticated, user } = useAuth();
   return (
-    <div css={{ display: 'flex', justifyContent: 'center' }}>
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
       <Container maxW={'3xl'}>
         <Stack
           as={Box}
@@ -101,7 +107,7 @@ export default function Home() {
           )}
         </Stack>
       </Container>
-    </div>
+    </Flex>
   );
 }
 
