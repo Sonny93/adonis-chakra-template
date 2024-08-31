@@ -1,13 +1,13 @@
 {
   "Servers": {
     "1": {
-      "Name": "MY_CUSTOM_PROJET",
+      "Name": "my_custom_project",
       "Group": "Servers",
       "Port": 5432,
       "Username": "postgres",
       "Host": "postgres",
       "SSLMode": "prefer",
-      "MaintenanceDB": "MY_CUSTOM_PROJET"
+      "MaintenanceDB": "my_custom_project"
     }
   }
 }

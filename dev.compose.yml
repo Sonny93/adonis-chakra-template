@@ -31,4 +31,4 @@ services:
 
 volumes:
   postgres_volume:
-    name: postgres_dev_MY_CUSTOM_PROJET
+    name: postgres_dev_my_custom_project

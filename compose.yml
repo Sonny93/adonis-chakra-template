@@ -34,8 +34,8 @@ services:
     ports:
       - '5050:80'
 
-  MY_CUSTOM_PROJET:
-    container_name: MY_CUSTOM_PROJET
+  my_custom_project:
+    container_name: my_custom_project
     restart: always
     build:
       context: .
@@ -53,4 +53,4 @@ services:
 
 volumes:
   postgres-volume:
-    name: postgres-prod-MY_CUSTOM_PROJET
+    name: postgres-prod-my_custom_project

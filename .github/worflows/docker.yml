@@ -16,7 +16,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: sonny93/MY_CUSTOM_PROJET
+          images: sonny93/my_custom_project
           flavor: latest=true
           tags: |
             type=semver,pattern={{version}}
