@@ -14,9 +14,10 @@ export default class LoginController {
    * Handle form submission for the create action
    */
   async store({ request, response, auth }: HttpContext) {
-    const { email, password } = await request.validateUsing(userLoginValidator);
+    const { email, password, rememberMe } =
+      await request.validateUsing(userLoginValidator);
     const user = await User.verifyCredentials(email, password);
-    await auth.use('web').login(user);
+    await auth.use('web').login(user, !!rememberMe);
     response.redirect('/');
   }
 }
