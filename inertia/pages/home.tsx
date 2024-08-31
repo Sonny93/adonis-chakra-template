@@ -5,12 +5,16 @@ import {
   createIcon,
   Heading,
   Icon,
+  Link,
   Stack,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Link as InertiaLink } from '@inertiajs/react';
+import useAuth from '~/hooks/use_auth';
 
 export default function Home() {
+  const { isAuthenticated, user } = useAuth();
   return (
     <div css={{ display: 'flex', justifyContent: 'center' }}>
       <Container maxW={'3xl'}>
@@ -34,48 +38,67 @@ export default function Home() {
             Use this wonderfull template to create your own website. <br /> It's
             easy to use and you can customize it as you want.
           </Text>
-          <Stack
-            direction={'column'}
-            spacing={3}
-            align={'center'}
-            alignSelf={'center'}
-            position={'relative'}
-          >
-            <Button
-              colorScheme={'green'}
-              bg={'green.400'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bg: 'green.500',
-              }}
+          {!isAuthenticated ? (
+            <Stack
+              direction={'column'}
+              spacing={3}
+              align={'center'}
+              alignSelf={'center'}
+              position={'relative'}
             >
-              Get Started
-            </Button>
-            <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-              Learn more
-            </Button>
-            <Box>
-              <Icon
-                as={Arrow}
-                color={useColorModeValue('gray.800', 'gray.300')}
-                w={71}
-                position={'absolute'}
-                right={-71}
-                top={'10px'}
-              />
-              <Text
-                fontSize={'lg'}
-                fontFamily={'Caveat'}
-                position={'absolute'}
-                right={'-125px'}
-                top={'-15px'}
-                transform={'rotate(10deg)'}
+              <Button
+                as={Link}
+                href="/auth/signin"
+                colorScheme={'green'}
+                bg={'green.400'}
+                rounded={'full'}
+                px={6}
+                _hover={{
+                  bg: 'green.500',
+                }}
               >
-                Starting at $15/mo
+                Sign Up
+              </Button>
+              <Button
+                as={Link}
+                href="/auth/login"
+                variant={'link'}
+                colorScheme={'blue'}
+                size={'sm'}
+              >
+                Login
+              </Button>
+              <Box>
+                <Icon
+                  as={Arrow}
+                  color={useColorModeValue('gray.800', 'gray.300')}
+                  w={71}
+                  position={'absolute'}
+                  right={-71}
+                  top={'10px'}
+                />
+                <Text
+                  fontSize={'lg'}
+                  fontFamily={'Caveat'}
+                  position={'absolute'}
+                  right={'-125px'}
+                  top={'-15px'}
+                  transform={'rotate(10deg)'}
+                >
+                  Getting started
+                </Text>
+              </Box>
+            </Stack>
+          ) : (
+            <Box p={8}>
+              <Text mb={4}>
+                Welcome back <strong>{user.firstname}</strong>!
               </Text>
+              <InertiaLink as="button" method="post" href="/auth/logout">
+                Logout
+              </InertiaLink>
             </Box>
-          </Stack>
+          )}
         </Stack>
       </Container>
     </div>
