@@ -3,7 +3,9 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid';
 import { DbRememberMeTokensProvider } from '@adonisjs/auth/session';
 import { compose } from '@adonisjs/core/helpers';
 import hash from '@adonisjs/core/services/hash';
-import { column } from '@adonisjs/lucid/orm';
+import { column, computed } from '@adonisjs/lucid/orm';
+import { DateTime } from 'luxon';
+import { capitalize } from '#lib/capitalize';
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -27,4 +29,12 @@ export default class User extends compose(AppBaseModel, AuthFinder) {
 
   @column()
   declare avatar: string;
+
+  @column()
+  declare emailVerifiedAt: DateTime | null;
+
+  @computed()
+  get fullname() {
+    return `${capitalize(this.firstname)} ${capitalize(this.lastname)}`;
+  }
 }

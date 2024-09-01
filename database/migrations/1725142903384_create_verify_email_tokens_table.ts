@@ -1,14 +1,14 @@
 import { BaseSchema } from '@adonisjs/lucid/schema';
 
 export default class extends BaseSchema {
-  protected tableName = 'remember_me_tokens';
+  protected tableName = 'verify_email_tokens';
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments();
+      table.increments('id');
 
       table
-        .integer('tokenable_id')
+        .integer('user_id')
         .notNullable()
         .unsigned()
         .references('id')
@@ -16,8 +16,8 @@ export default class extends BaseSchema {
         .onDelete('CASCADE');
       table.string('hash').notNullable().unique();
 
-      table.timestamp('created_at').notNullable();
-      table.timestamp('updated_at').notNullable();
+      table.timestamp('created_at');
+      table.timestamp('updated_at');
       table.timestamp('expires_at').notNullable();
     });
   }

@@ -1,3 +1,4 @@
+import VerifyEmailException from '#exceptions/verify_email_exception';
 import { errors as authErrors } from '@adonisjs/auth';
 import { ExceptionHandler, HttpContext } from '@adonisjs/core/http';
 import app from '@adonisjs/core/services/app';
@@ -40,12 +41,16 @@ export default class HttpExceptionHandler extends ExceptionHandler {
     if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
       ctx.session.flash('errors', [error]);
     }
+    if (error instanceof VerifyEmailException) {
+      ctx.session.flash('errors', [error.toString()]);
+      return ctx.response.redirect().back();
+    }
 
     if (error instanceof errors.E_ROW_NOT_FOUND) {
       return ctx.response.redirect('/');
     }
 
-    // TODO: handle duplicated entries for email
+    // TODO: handle email verification exception
 
     return super.handle(error, ctx);
   }

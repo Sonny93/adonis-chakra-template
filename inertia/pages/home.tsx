@@ -11,7 +11,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Link as InertiaLink } from '@inertiajs/react';
+import { Head, Link as InertiaLink } from '@inertiajs/react';
 import useAuth from '~/hooks/use_auth';
 
 export default function Home() {
@@ -23,6 +23,7 @@ export default function Home() {
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
+      <Head title="Home" />
       <Container maxW={'3xl'}>
         <Stack
           as={Box}
@@ -35,7 +36,7 @@ export default function Home() {
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}
           >
-            My wonderfull <br />
+            My wonderful <br />
             <Text as={'span'} color={'green.400'}>
               template
             </Text>
@@ -98,7 +99,7 @@ export default function Home() {
           ) : (
             <Box p={8}>
               <Text mb={4}>
-                Welcome back <strong>{user.firstname}</strong>!
+                Welcome back <strong>{user.fullname}</strong>!
               </Text>
               <InertiaLink as="button" method="post" href="/auth/logout">
                 Logout

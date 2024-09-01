@@ -6,6 +6,7 @@ import {
 import type { PropsWithChildren } from 'react';
 
 const {
+  Alert,
   Button,
   Input,
   Checkbox,
@@ -18,6 +19,7 @@ const {
 
 const theme = extendBaseTheme({
   components: {
+    Alert,
     Button,
     Input,
     Checkbox,

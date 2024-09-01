@@ -1,9 +1,25 @@
-import vine from '@vinejs/vine';
+import { existRule } from '#validators/rules/exist';
+import vine, { SimpleMessagesProvider } from '@vinejs/vine';
 
-export const userLoginValidator = vine.compile(
+const userLoginValidator = vine.compile(
   vine.object({
-    email: vine.string().email().trim(),
+    email: vine
+      .string()
+      .email()
+      .trim()
+      .use(
+        existRule({
+          table: 'users',
+          column: 'email',
+        })
+      ),
     password: vine.string().trim(),
     rememberMe: vine.boolean().optional(),
   })
 );
+
+userLoginValidator.messagesProvider = new SimpleMessagesProvider({
+  'email.exist': 'No account found for this email address',
+});
+
+export { userLoginValidator };

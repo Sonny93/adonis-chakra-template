@@ -1,5 +1,5 @@
 import { SharedProps } from '@adonisjs/inertia/types';
-import { Flex, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Alert, Flex, Stack, useColorModeValue } from '@chakra-ui/react';
 import { useForm, usePage } from '@inertiajs/react';
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
 
@@ -44,11 +44,14 @@ export default function Form<T>({
       }
     );
   };
+  console.log(inertiaErrors);
   const handleChangeInput: OnChangeType = ({ target }) =>
     setData(target.name as never, target.value as never);
 
+  const { success } = usePage<SharedProps>().props;
   return (
     <form onSubmit={handleSubmit}>
+      {success && <Alert status="success">{success}</Alert>}
       <Flex
         minH={'100vh'}
         align={'center'}
