@@ -11,7 +11,7 @@ This template was created with husky, a bit of github action and a custom pretti
 ### How to use it
 
 ```shell
-pnpm create adonisjs@latest -- -K="sonny93/adonis-chakra-template"
+pnpm create adonisjs@latest -K=sonny93/adonis-chakra-template
 # or
 npm init adonisjs@latest -- -K="sonny93/adonis-chakra-template"
 ```
